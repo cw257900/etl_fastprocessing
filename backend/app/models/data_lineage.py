@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, JSON, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-
-Base = declarative_base()
+from app.core.database import Base
 
 class DataLineage(Base):
     __tablename__ = "data_lineage"
@@ -11,7 +9,7 @@ class DataLineage(Base):
     source_id = Column(Integer, ForeignKey("data_sources.id"))
     job_id = Column(Integer, ForeignKey("processing_jobs.id"))
     event_type = Column(String, nullable=False)
-    metadata = Column(JSON)
+    additional_metadata = Column(JSON)
     input_schema = Column(JSON)
     output_schema = Column(JSON)
     transformation_details = Column(JSON)

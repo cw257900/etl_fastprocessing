@@ -5,7 +5,9 @@ from app.core.config import settings
 from app.core.database import engine
 from app.models import Base
 
-Base.metadata.create_all(bind=engine)
+import os
+if os.getenv("SKIP_DB_INIT") != "true":
+    Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="ETL Fast Processing API",
