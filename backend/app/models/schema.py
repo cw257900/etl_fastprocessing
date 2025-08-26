@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, JSON, Float, ForeignKey, Boolean
-from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-
-Base = declarative_base()
+from app.core.database import Base
 
 class DetectedSchema(Base):
     __tablename__ = "detected_schemas"

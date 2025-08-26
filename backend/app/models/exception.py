@@ -1,9 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, JSON, Enum, Text, ForeignKey, Boolean
-from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 import enum
-
-Base = declarative_base()
+from app.core.database import Base
 
 class ExceptionSeverity(enum.Enum):
     LOW = "low"
@@ -19,7 +17,7 @@ class DataException(Base):
     exception_type = Column(String, nullable=False)
     message = Column(Text, nullable=False)
     severity = Column(Enum(ExceptionSeverity), nullable=False)
-    metadata = Column(JSON)
+    additional_metadata = Column(JSON)
     stack_trace = Column(Text)
     resolved = Column(Boolean, default=False)
     resolved_by = Column(Integer)

@@ -1,9 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Enum, Text, ForeignKey, Boolean
-from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 import enum
-
-Base = declarative_base()
+from app.core.database import Base
 
 class WorkflowState(enum.Enum):
     PENDING = "pending"
@@ -26,7 +24,7 @@ class WorkflowApproval(Base):
     submitted_by = Column(Integer, nullable=False)
     approved_by = Column(Integer)
     comments = Column(Text)
-    metadata = Column(String)
+    additional_metadata = Column(String)
     submitted_at = Column(DateTime, default=datetime.utcnow)
     approved_at = Column(DateTime)
     created_at = Column(DateTime, default=datetime.utcnow)
