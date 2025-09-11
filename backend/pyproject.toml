@@ -3,6 +3,7 @@ name = "etl-fastprocessing-backend"
 version = "1.0.0"
 description = "Comprehensive ETL tool backend for data onboarding and processing"
 authors = ["ETL Team"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
