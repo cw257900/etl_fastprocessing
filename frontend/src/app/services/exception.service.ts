@@ -13,8 +13,8 @@ export class ExceptionService {
   constructor(private http: HttpClient) {}
 
   getExceptions(resolved?: boolean): Observable<DataException[]> {
-    const params = resolved !== undefined ? { resolved: resolved.toString() } : {};
-    return this.http.get<DataException[]>(this.apiUrl, { params });
+    const params = resolved !== undefined ? { resolved: resolved.toString() } : undefined;
+    return this.http.get<DataException[]>(this.apiUrl, params ? { params } : {});
   }
 
   getException(id: number): Observable<DataException> {

@@ -1,0 +1,267 @@
+{
+  "processing_name": "FLEX_PP_Balance_ETL",
+  "version": "1.0",
+  "description": "Processing rules for converting financial transaction data to FLEX PP Balance format",
+  "transformation_rules": [
+    {
+      "rule_id": "LEAF_GL_CALCULATION",
+      "description": "Calculate LEAF_GL based on currency and product type",
+      "input_fields": ["CURRENCY_Cosmos", "PRODUCT_TYPE", "LEAF_GL", "FACE_VALUE", "LCY_FACE_VALUE"],
+      "output_field": "SUBACC",
+      "logic": {
+        "conditions": [
+          {
+            "condition": "CURRENCY_Cosmos == 'JPY' AND PRODUCT_TYPE IN ['D', 'G']",
+            "action": "CONCAT(LEAF_GL, '_JPY_D_G')",
+            "amount_source": "LCY_FACE_VALUE"
+          },
+          {
+            "condition": "CURRENCY_Cosmos == 'JPY' AND PRODUCT_TYPE NOT IN ['D', 'G']",
+            "action": "CONCAT(LEAF_GL, '_JPY_OTHER')",
+            "amount_source": "LCY_FACE_VALUE",
+            "amount_multiplier": -1
+          },
+          {
+            "condition": "CURRENCY_Cosmos != 'JPY' AND PRODUCT_TYPE IN ['D', 'G']",
+            "action": "CONCAT(LEAF_GL, '_NOJPY_D_G')",
+            "amount_source": "FACE_VALUE"
+          },
+          {
+            "condition": "CURRENCY_Cosmos != 'JPY' AND PRODUCT_TYPE NOT IN ['D', 'G']",
+            "action": "CONCAT(LEAF_GL, '_NOJPY_OTHER')",
+            "amount_source": "FACE_VALUE",
+            "amount_multiplier": -1
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "ACCRUAL_ACCOUNT_LOGIC",
+      "description": "Calculate Accrual Account based on currency",
+      "input_fields": ["Currency_Flex", "Amt_Net_Accr_Lcy", "Amt_Net_Accr_Fcy"],
+      "output_field": "ACCRUAL_ACCOUNT",
+      "logic": {
+        "conditions": [
+          {
+            "condition": "Currency_Flex == 'JPY'",
+            "action": "USE_FIELD",
+            "source_field": "Amt_Net_Accr_Lcy"
+          },
+          {
+            "condition": "Currency_Flex != 'JPY'",
+            "action": "USE_FIELD",
+            "source_field": "Amt_Net_Accr_Fcy"
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "DRORCR_CALCULATION",
+      "description": "Calculate DRORCR based on contract status and amount sign",
+      "input_fields": ["CONTRACT_STATUS", "FACE_VALUE"],
+      "output_field": "DRORCR",
+      "logic": {
+        "conditions": [
+          {
+            "condition": "CONTRACT_STATUS == 'Y' AND FACE_VALUE >= 0",
+            "action": "SET_VALUE",
+            "value": "C"
+          },
+          {
+            "condition": "CONTRACT_STATUS == 'Y' AND FACE_VALUE < 0",
+            "action": "SET_VALUE",
+            "value": "D"
+          },
+          {
+            "condition": "CONTRACT_STATUS == 'A' AND FACE_VALUE >= 0",
+            "action": "SET_VALUE",
+            "value": "D"
+          },
+          {
+            "condition": "CONTRACT_STATUS == 'A' AND FACE_VALUE < 0",
+            "action": "SET_VALUE",
+            "value": "C"
+          }
+        ],
+        "default_action": {
+          "condition": "DEFAULT",
+          "action": "CALCULATE_SIGN",
+          "logic": "IF FACE_VALUE >= 0 THEN 'C' ELSE 'D'"
+        }
+      }
+    },
+    {
+      "rule_id": "BALANCE_SIGN_CALCULATION",
+      "description": "Calculate balance signs (OPBALSIGN/CLBALSIGN)",
+      "input_fields": ["FACE_VALUE", "LCY_FACE_VALUE", "Currency_Flex"],
+      "output_fields": ["OPBALSIGN", "CLBALSIGN"],
+      "logic": {
+        "amount_determination": {
+          "condition": "Currency_Flex == 'JPY'",
+          "true_source": "LCY_FACE_VALUE",
+          "false_source": "FACE_VALUE"
+        },
+        "sign_calculation": {
+          "negative": "D",
+          "positive_or_zero": "C"
+        }
+      }
+    },
+    {
+      "rule_id": "DATE_FORMATTING",
+      "description": "Format dates to YYYYMMDD",
+      "input_fields": ["VALUE_DATE", "DEAL_DATE", "MATURITY_DATE"],
+      "output_fields": ["VALUEDATE", "ENTRYDATE", "OPBALDATE", "CLBALDATE"],
+      "logic": {
+        "supported_formats": [
+          "YYYY-MM-DD",
+          "YYYYMMDD",
+          "DD/MM/YYYY",
+          "MM/DD/YYYY"
+        ],
+        "output_format": "YYYYMMDD",
+        "error_handling": "RETURN_EMPTY_STRING"
+      }
+    },
+    {
+      "rule_id": "AMOUNT_CALCULATION",
+      "description": "Calculate transaction amounts",
+      "input_fields": ["FACE_VALUE", "LCY_FACE_VALUE", "Currency_Flex"],
+      "output_fields": ["AMOUNT", "OPBAL", "CLBAL"],
+      "logic": {
+        "amount_source": {
+          "condition": "Currency_Flex == 'JPY'",
+          "true_source": "LCY_FACE_VALUE",
+          "false_source": "FACE_VALUE"
+        },
+        "amount_field_logic": {
+          "AMOUNT": "ABS(amount_source)",
+          "OPBAL": "amount_source",
+          "CLBAL": "amount_source"
+        }
+      }
+    }
+  ],
+  "field_mappings": [
+    {
+      "output_field": "SIDE",
+      "input_field": "MODULE_CODE",
+      "transformation": "DEFAULT_VALUE",
+      "default_value": "Y"
+    },
+    {
+      "output_field": "TERMID",
+      "input_field": "MODULE_CODE",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "DESTID",
+      "input_field": "MODULE_CODE",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "OURREF",
+      "input_field": "COUNTRY_CODE",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "THEIRREF",
+      "input_field": "COUNTRY_CODE",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "STMTNO",
+      "input_field": "",
+      "transformation": "DEFAULT_VALUE",
+      "default_value": "Y"
+    },
+    {
+      "output_field": "STMTPG",
+      "input_field": "",
+      "transformation": "DEFAULT_VALUE",
+      "default_value": "Y"
+    },
+    {
+      "output_field": "OPBALCY",
+      "input_field": "Currency_Flex",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "CLBALCY",
+      "input_field": "Currency_Flex",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "TRANCODE",
+      "input_field": "JP_MMISD",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "REF1",
+      "input_field": "THEIR_REFERENCE",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "REF2",
+      "input_field": "CONTRACT_REF_NO",
+      "transformation": "DIRECT_COPY"
+    },
+    {
+      "output_field": "REF3",
+      "input_field": "",
+      "transformation": "DEFAULT_VALUE",
+      "default_value": ""
+    },
+    {
+      "output_field": "XSTR1",
+      "input_field": "INTEREST_RATE",
+      "transformation": "STRING_CONVERSION"
+    }
+  ],
+  "business_conditions": [
+    {
+      "condition_id": "MISSING_ACCOUNT_BALANCES",
+      "description": "Load balances for accounts without transactions",
+      "logic": "If no transaction for any account, load balances with current day value date. Closing balance from yesterday should be populated as today's opening balance.",
+      "implementation_note": "Requires integration with historical balance data source"
+    },
+    {
+      "condition_id": "SIGNAGE_LOGIC",
+      "description": "Apply signage logic for balance columns",
+      "logic": "Following logic needs to be applied for the signage of those columns",
+      "details": {
+        "DRORCR": "Based on amount sign and contract status",
+        "OPBALSIGN": "Based on opening balance amount sign",
+        "CLBALSIGN": "Based on closing balance amount sign"
+      }
+    }
+  ],
+  "validation_rules": [
+    {
+      "rule_id": "MANDATORY_FIELD_CHECK",
+      "description": "Validate all mandatory fields are present",
+      "fields": ["SIDE", "TERMID", "SUBACC", "VALUEDATE", "AMOUNT", "DRORCR"]
+    },
+    {
+      "rule_id": "CURRENCY_CONSISTENCY",
+      "description": "Ensure currency consistency across related fields",
+      "logic": "OPBALCY and CLBALCY should match Currency_Flex"
+    },
+    {
+      "rule_id": "DATE_FORMAT_VALIDATION",
+      "description": "Validate all dates are in YYYYMMDD format",
+      "fields": ["VALUEDATE", "ENTRYDATE", "OPBALDATE", "CLBALDATE"]
+    },
+    {
+      "rule_id": "AMOUNT_VALIDATION",
+      "description": "Validate amount fields are numeric",
+      "fields": ["AMOUNT", "OPBAL", "CLBAL"]
+    }
+  ],
+  "error_handling": {
+    "missing_data": "LOG_WARNING_CONTINUE",
+    "invalid_format": "LOG_ERROR_SKIP_RECORD",
+    "transformation_error": "LOG_ERROR_USE_DEFAULT",
+    "validation_failure": "LOG_ERROR_MARK_INVALID"
+  }
+}
