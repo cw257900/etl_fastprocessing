@@ -46,5 +46,15 @@ export const routes: Routes = [
     loadComponent: () => import('./components/exceptions/exceptions.component').then(m => m.ExceptionsComponent),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'etl-config',
+    loadComponent: () => import('./components/etl-config/etl-config.component').then(m => m.ETLConfigComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'etl-converter',
+    loadComponent: () => import('./components/etl-converter/etl-converter.component').then(m => m.ETLConverterComponent),
+    canActivate: [AuthGuard]
+  },
   { path: '**', redirectTo: '/dashboard' }
 ];

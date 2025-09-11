@@ -1,0 +1,309 @@
+{
+  "schema_name": "FLEX_PP_Balance_Output",
+  "version": "1.0",
+  "description": "Output schema for FLEX PP Balance format",
+  "file_format": "FD_25023_Flexpp_IP_MM_I[FILENAME[0,15]]_I[FILENAME[20,28]]",
+  "file_extension": ".cbal",
+  "columns": [
+    {
+      "name": "SIDE",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "MODULE_CODE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Side identifier"
+    },
+    {
+      "name": "TERMID",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "MODULE_CODE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Terminal ID"
+    },
+    {
+      "name": "DESTID",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "N",
+      "input_mapped_column": "MODULE_CODE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Destination ID"
+    },
+    {
+      "name": "OURREF",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "N",
+      "input_mapped_column": "COUNTRY_CODE",
+      "transformation_applied": "N",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Our reference"
+    },
+    {
+      "name": "THEIRREF",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "N",
+      "input_mapped_column": "COUNTRY_CODE",
+      "transformation_applied": "N",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Their reference"
+    },
+    {
+      "name": "SUBACC",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "LEAF_GL",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Sub account"
+    },
+    {
+      "name": "STMTNO",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Statement number"
+    },
+    {
+      "name": "STMTPG",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Statement page"
+    },
+    {
+      "name": "VALUEDATE",
+      "data_type": "string",
+      "format": "Date",
+      "mandatory": "Y",
+      "input_mapped_column": "VALUE_DATE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Value date"
+    },
+    {
+      "name": "OPBALSIGN",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Opening balance sign"
+    },
+    {
+      "name": "OPBALTP",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Opening balance type"
+    },
+    {
+      "name": "OPBALDATE",
+      "data_type": "string",
+      "format": "Date",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Opening balance date"
+    },
+    {
+      "name": "OPBALCY",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "Currency_Flex",
+      "transformation_applied": "N",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Opening balance currency"
+    },
+    {
+      "name": "OPBAL",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "N",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Opening balance amount"
+    },
+    {
+      "name": "CLBALSIGN",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Closing balance sign"
+    },
+    {
+      "name": "CLBALTP",
+      "data_type": "string",
+      "format": "Date",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Closing balance type"
+    },
+    {
+      "name": "CLBALDATE",
+      "data_type": "string",
+      "format": "Date",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Closing balance date"
+    },
+    {
+      "name": "CLBALCY",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "Amt_Net_Accr_Fcy",
+      "transformation_applied": "N",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Closing balance currency"
+    },
+    {
+      "name": "CLBAL",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "N",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Closing balance amount"
+    },
+    {
+      "name": "DRORCR",
+      "data_type": "string",
+      "format": "Text",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Debit or Credit indicator"
+    },
+    {
+      "name": "AMOUNT",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "LCY_FACE_VALUE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Transaction amount"
+    },
+    {
+      "name": "TRANCODE",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "JP_MMISD",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Transaction code"
+    },
+    {
+      "name": "ENTRYDATE",
+      "data_type": "string",
+      "format": "Date",
+      "mandatory": "Y",
+      "input_mapped_column": "DEAL_DATE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Entry date"
+    },
+    {
+      "name": "REF1",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "Y",
+      "input_mapped_column": "THEIR_REFERENCE",
+      "transformation_applied": "Y",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Reference 1"
+    },
+    {
+      "name": "REF2",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "N",
+      "input_mapped_column": "CONTRACT_REF_NO",
+      "transformation_applied": "N",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Reference 2"
+    },
+    {
+      "name": "REF3",
+      "data_type": "string",
+      "format": "NA",
+      "mandatory": "N",
+      "input_mapped_column": "",
+      "transformation_applied": "N",
+      "lookup_applied": "N",
+      "lookup_type": "NA",
+      "description": "Reference 3"
+    }
+  ],
+  "additional_fields": {
+    "description": "Additional fields from ACCOWNRINFO to BENCOVER with default empty values",
+    "fields": [
+      "ACCOWNRINFO", "SCO", "SDE", "INS", "QTY", "PRC", "BRK", "BRC",
+      "XSTR1", "XSTR2", "XSTR3", "XSTR4", "XSTR5", "XSTR6", "XSTR7", "XSTR8", "XSTR9", "XSTR10", "XSTR11",
+      "XDATE1", "XDATE2", "XDATE3", "XDATE4", "XDATE5", "XDATE6", "XDATE7", "XDATE8", "XDATE9", "XDATE10",
+      "XAMT1", "XAMT2", "XAMT3", "XAMT4", "XAMT5", "XAMT6", "XAMT7", "XAMT8", "XAMT9", "XAMT10",
+      "XCY1", "XCY2", "XCY3", "XCY4", "XCY5", "XCY6", "XCY7", "XCY8", "XCY9", "XCY10",
+      "XFLAG1", "XFLAG2", "XFLAG3", "XFLAG4", "XFLAG5", "XFLAG6", "XFLAG7", "XFLAG8", "XFLAG9", "XFLAG10", "XFLAG11", "XFLAG12", "XFLAG13", "XFLAG14", "XFLAG15", "XFLAG16", "XFLAG17",
+      "PRCCCY", "NARR", "ORDINST", "DCV", "FIN", "POSTINGCATEGORY", "DIFFTYPE",
+      "XSTR12", "XSTR13", "XSTR14", "XSTR16", "XSTR17", "XSTR18", "XSTR19", "XSTR20", "XSTR21",
+      "ITEMBEN", "BENCOVER"
+    ]
+  }
+}

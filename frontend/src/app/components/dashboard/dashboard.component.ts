@@ -107,6 +107,14 @@ import { WorkflowService } from '../../services/workflow.service';
             <mat-icon>account_tree</mat-icon>
             View Lineage
           </button>
+          <button mat-raised-button color="accent" routerLink="/etl-converter">
+            <mat-icon>transform</mat-icon>
+            ETL Converter
+          </button>
+          <button mat-raised-button routerLink="/etl-config">
+            <mat-icon>settings</mat-icon>
+            ETL Config
+          </button>
         </div>
       </div>
     </div>

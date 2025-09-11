@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1.endpoints import auth, data_sources, ingestion, processing, workflow, lineage, exceptions
+from app.api.v1.endpoints import auth, data_sources, ingestion, processing, workflow, lineage, exceptions, etl_config
 
 api_router = APIRouter()
 
@@ -10,3 +10,4 @@ api_router.include_router(processing.router, prefix="/processing", tags=["proces
 api_router.include_router(workflow.router, prefix="/workflow", tags=["workflow"])
 api_router.include_router(lineage.router, prefix="/lineage", tags=["lineage"])
 api_router.include_router(exceptions.router, prefix="/exceptions", tags=["exceptions"])
+api_router.include_router(etl_config.router, prefix="/etl-config", tags=["etl-config"])

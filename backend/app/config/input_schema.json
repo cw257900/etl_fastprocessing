@@ -1,0 +1,301 @@
+{
+  "schema_name": "Financial_Transaction_Input",
+  "version": "1.0",
+  "description": "Input schema for financial transaction data to be converted to FLEX PP Balance format",
+  "columns": [
+    {
+      "name": "RECORD_TYPE",
+      "data_type": "string",
+      "length": 1,
+      "required": true,
+      "description": "Record type identifier"
+    },
+    {
+      "name": "COUNTRY_CODE",
+      "data_type": "string",
+      "length": 3,
+      "required": true,
+      "description": "Country code"
+    },
+    {
+      "name": "BRANCH",
+      "data_type": "string",
+      "length": 3,
+      "required": true,
+      "description": "Branch identifier"
+    },
+    {
+      "name": "CONTRACT_REF_NO",
+      "data_type": "string",
+      "length": 16,
+      "required": true,
+      "description": "Contract reference number"
+    },
+    {
+      "name": "PRODUCT_TYPE",
+      "data_type": "string",
+      "length": 4,
+      "required": true,
+      "description": "Product type (D, G, L, etc.)"
+    },
+    {
+      "name": "PRODUCT_GL",
+      "data_type": "string",
+      "length": 10,
+      "required": true,
+      "description": "Product GL code"
+    },
+    {
+      "name": "LEAF_GL",
+      "data_type": "string",
+      "length": 10,
+      "required": true,
+      "description": "Leaf GL code"
+    },
+    {
+      "name": "TAKEDOWN_ACCOUNT",
+      "data_type": "string",
+      "length": 20,
+      "required": false,
+      "description": "Takedown account"
+    },
+    {
+      "name": "CURRENCY_Cosmos",
+      "data_type": "string",
+      "length": 3,
+      "required": true,
+      "description": "Currency code from Cosmos system"
+    },
+    {
+      "name": "VALUE_DATE",
+      "data_type": "string",
+      "length": 8,
+      "required": true,
+      "description": "Value date (YYYYMMDD)"
+    },
+    {
+      "name": "MATURITY_DATE",
+      "data_type": "string",
+      "length": 8,
+      "required": false,
+      "description": "Maturity date (YYYYMMDD)"
+    },
+    {
+      "name": "INTEREST_BASIS",
+      "data_type": "string",
+      "length": 22,
+      "required": false,
+      "description": "Interest calculation basis"
+    },
+    {
+      "name": "INTEREST_RATE",
+      "data_type": "string",
+      "length": 22,
+      "required": false,
+      "description": "Interest rate"
+    },
+    {
+      "name": "CREDIT_LINE",
+      "data_type": "string",
+      "length": 11,
+      "required": false,
+      "description": "Credit line amount"
+    },
+    {
+      "name": "COUNTERPARTY",
+      "data_type": "string",
+      "length": 10,
+      "required": false,
+      "description": "Counterparty identifier"
+    },
+    {
+      "name": "MATURITY_TYPE",
+      "data_type": "string",
+      "length": 1,
+      "required": false,
+      "description": "Maturity type"
+    },
+    {
+      "name": "REFINANCE_RATE",
+      "data_type": "string",
+      "length": 22,
+      "required": false,
+      "description": "Refinance rate"
+    },
+    {
+      "name": "ACCRUED_INTEREST",
+      "data_type": "string",
+      "length": 22,
+      "required": false,
+      "description": "Accrued interest amount"
+    },
+    {
+      "name": "MODULE_CODE",
+      "data_type": "string",
+      "length": 2,
+      "required": true,
+      "description": "Module code"
+    },
+    {
+      "name": "CUSTOM_REF_NO",
+      "data_type": "string",
+      "length": 16,
+      "required": false,
+      "description": "Custom reference number"
+    },
+    {
+      "name": "CONTRACT_STATUS",
+      "data_type": "string",
+      "length": 1,
+      "required": true,
+      "description": "Contract status (Y, A, etc.)"
+    },
+    {
+      "name": "FACE_VALUE",
+      "data_type": "string",
+      "length": 22,
+      "required": true,
+      "description": "Face value amount"
+    },
+    {
+      "name": "LIQUIDATION_MODE",
+      "data_type": "string",
+      "length": 1,
+      "required": false,
+      "description": "Liquidation mode"
+    },
+    {
+      "name": "HOLIDAY_CCY",
+      "data_type": "string",
+      "length": 3,
+      "required": false,
+      "description": "Holiday currency"
+    },
+    {
+      "name": "CATEGORY_CODE",
+      "data_type": "string",
+      "length": 10,
+      "required": false,
+      "description": "Category code"
+    },
+    {
+      "name": "RATE_TYPE",
+      "data_type": "string",
+      "length": 1,
+      "required": false,
+      "description": "Rate type"
+    },
+    {
+      "name": "RATE_KEY",
+      "data_type": "string",
+      "length": 10,
+      "required": false,
+      "description": "Rate key"
+    },
+    {
+      "name": "SPREAD",
+      "data_type": "string",
+      "length": 22,
+      "required": false,
+      "description": "Spread amount"
+    },
+    {
+      "name": "THEIR_REFERENCE",
+      "data_type": "string",
+      "length": 35,
+      "required": false,
+      "description": "Their reference"
+    },
+    {
+      "name": "TRADER_ID",
+      "data_type": "string",
+      "length": 12,
+      "required": false,
+      "description": "Trader identifier"
+    },
+    {
+      "name": "DEAL_DATE",
+      "data_type": "string",
+      "length": 8,
+      "required": true,
+      "description": "Deal date (YYYYMMDD)"
+    },
+    {
+      "name": "LCY_FACE_VALUE",
+      "data_type": "string",
+      "length": 21,
+      "required": true,
+      "description": "Local currency face value"
+    },
+    {
+      "name": "LCY_OS_BAL",
+      "data_type": "string",
+      "length": 23,
+      "required": false,
+      "description": "Local currency outstanding balance"
+    },
+    {
+      "name": "ACCRUAL_ACCOUNT",
+      "data_type": "string",
+      "length": 20,
+      "required": false,
+      "description": "Accrual account"
+    },
+    {
+      "name": "OUTSTANDING_ACCR",
+      "data_type": "string",
+      "length": 22,
+      "required": false,
+      "description": "Outstanding accrual"
+    },
+    {
+      "name": "Currency_Flex",
+      "data_type": "string",
+      "length": 3,
+      "required": true,
+      "description": "Currency for FLEX system"
+    },
+    {
+      "name": "Amt_Net_Accr_Fcy",
+      "data_type": "string",
+      "length": 22,
+      "required": false,
+      "description": "Net accrual amount in foreign currency"
+    },
+    {
+      "name": "Amt_Net_Accr_Lcy",
+      "data_type": "string",
+      "length": 22,
+      "required": false,
+      "description": "Net accrual amount in local currency"
+    },
+    {
+      "name": "JP_MMISD",
+      "data_type": "string",
+      "length": 10,
+      "required": false,
+      "description": "JP MMISD code for transaction"
+    }
+  ],
+  "validation_rules": [
+    {
+      "rule_type": "required_fields",
+      "fields": ["RECORD_TYPE", "COUNTRY_CODE", "BRANCH", "CONTRACT_REF_NO", "PRODUCT_TYPE", "MODULE_CODE", "CONTRACT_STATUS", "FACE_VALUE", "Currency_Flex", "VALUE_DATE", "DEAL_DATE"]
+    },
+    {
+      "rule_type": "currency_validation",
+      "field": "Currency_Flex",
+      "valid_values": ["JPY", "USD", "EUR", "GBP", "AUD", "CAD", "CHF", "SGD", "HKD"]
+    },
+    {
+      "rule_type": "product_type_validation",
+      "field": "PRODUCT_TYPE",
+      "valid_values": ["D", "G", "L", "F", "S", "T"]
+    },
+    {
+      "rule_type": "contract_status_validation",
+      "field": "CONTRACT_STATUS",
+      "valid_values": ["Y", "A", "C", "L"]
+    }
+  ]
+}
