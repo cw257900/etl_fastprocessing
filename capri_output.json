@@ -1,0 +1,15 @@
+[
+  {
+    "CAPRI_MSG_SEQ_NO": "123456789",
+    "RESP_ACK_DATETIME": "2024-01-1514:30:25",
+    "LEG1_STATUS_FLAG": "OK",
+    "LEG1_STATUS_FLAG_DESC": "Transaction processed successfully",
+    "LEG2_STATUS_FLAG": "OK",
+    "LEG2_STATUS_FLAG_DESC": "Second leg completed",
+    "STATUS": "OK",
+    "STATUS_DESC": "Success",
+    "STATUS_CODE": "200",
+    "STATUS_INFO_CODE": "S001",
+    "STATUS_INFO_MSG": "Transaction completed successfully"
+  }
+]

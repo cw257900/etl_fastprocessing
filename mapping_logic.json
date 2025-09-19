@@ -1,0 +1,108 @@
+{
+  "mapping_logic": {
+    "description": "Data mapping logic extracted from Talend tMap component",
+    "variables": {
+      "infoCode": {
+        "expression": "(Relational.ISNULL(row1.successCode) || row1.successCode.equalsIgnoreCase(\"null\") )? row1.errorCode : row1.successCode",
+        "type": "string",
+        "description": "Determines info code based on success or error code"
+      },
+      "infoMsg": {
+        "expression": "(Relational.ISNULL(row1.successMsg) || row1.successMsg.equalsIgnoreCase(\"null\"))? row1.errorMsg : row1.successMsg",
+        "type": "string",
+        "description": "Determines info message based on success or error message"
+      },
+      "status": {
+        "expression": "row1.status.trim().equalsIgnoreCase(\"OK\") ? 3 : row1.status.trim().equalsIgnoreCase(\"NOK\") ? 4 : 0",
+        "type": "integer",
+        "description": "Maps status string to integer values"
+      },
+      "messageID": {
+        "expression": "row1.messageSourceIdentifier.replaceAll(\"T\", \"\").replaceAll(\"CPR\", \"\").replaceAll(\"FPI\", \"\").replaceAll(\"FPC\", \"\").replaceAll(\"SWG\", \"\")",
+        "type": "string",
+        "description": "Extracts message ID by removing prefixes"
+      },
+      "FPI_CORR_ACC_NO": {
+        "expression": "new BigDecimal(\"100022022\")",
+        "type": "decimal",
+        "description": "Fixed correspondent account number for FPI"
+      },
+      "FCA_CORR_ACC_NO": {
+        "expression": "new BigDecimal(\"100026847\")",
+        "type": "decimal",
+        "description": "Fixed correspondent account number for FCA"
+      },
+      "Check_duplicates_trans": {
+        "expression": "(!Relational.ISNULL(row1.transactionStatusFlagDescription1) && (row1.transactionStatusFlagDescription1.toLowerCase().contains(\"duplicate transaction\")) || (!Relational.ISNULL(row1.transactionStatusFlagDescription2) && row1.transactionStatusFlagDescription2.toLowerCase().contains(\"duplicate transaction\"))) ? \"Y\" : \"N\"",
+        "type": "string",
+        "description": "Checks if transaction is duplicate based on status descriptions"
+      }
+    },
+    "output_mappings": {
+      "capri": {
+        "filter": "(row1.messageSourceIdentifier.contains(\"CPR\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+        "field_mappings": {
+          "CAPRI_MSG_SEQ_NO": "Var.messageID",
+          "RESP_ACK_DATETIME": "(row1.respAckDate + row1.respAckTime).replaceAll(\"null\", \"\")",
+          "LEG1_STATUS_FLAG": "row1.transactionStatusFlag1",
+          "LEG1_STATUS_FLAG_DESC": "row1.transactionStatusFlagDescription1",
+          "LEG2_STATUS_FLAG": "row1.transactionStatusFlag2",
+          "LEG2_STATUS_FLAG_DESC": "row1.transactionStatusFlagDescription2",
+          "STATUS": "row1.status",
+          "STATUS_DESC": "row1.statusDesc",
+          "STATUS_CODE": "row1.statusCode",
+          "STATUS_INFO_CODE": "Var.infoCode",
+          "STATUS_INFO_MSG": "Var.infoMsg"
+        }
+      },
+      "swing": {
+        "filter": "(row1.messageSourceIdentifier.contains(\"SWG\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+        "field_mappings": {
+          "SWING_MSG_SEQ_NO": "Var.messageID",
+          "RESP_ACK_DATETIME": "(row1.respAckDate + row1.respAckTime).replaceAll(\"null\", \"\")",
+          "LEG1_STATUS_FLAG": "row1.transactionStatusFlag1",
+          "LEG1_STATUS_FLAG_DESC": "row1.transactionStatusFlagDescription1",
+          "LEG2_STATUS_FLAG": "row1.transactionStatusFlag2",
+          "LEG2_STATUS_FLAG_DESC": "row1.transactionStatusFlagDescription2",
+          "STATUS": "row1.status",
+          "STATUS_DESC": "row1.statusDesc",
+          "STATUS_CODE": "row1.statusCode",
+          "STATUS_INFO_CODE": "Var.infoCode",
+          "STATUS_INFO_MSG": "Var.infoMsg"
+        }
+      },
+      "item": {
+        "filter": "(row1.messageSourceIdentifier.contains(\"T\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+        "field_mappings": {
+          "ITEM_ID": "new BigDecimal(Var.messageID)",
+          "DATE_17": "TalendDate.parseDate(\"yyyy-MM-dd\", row1.respAckDate)",
+          "FLAG_17": "Var.status",
+          "CURRENCY_17": "row1.statusCode",
+          "STRING_17": "Relational.ISNULL(row1.statusDesc) ? row1.statusCode : row1.statusDesc"
+        }
+      },
+      "FPI": {
+        "filter": "(row1.messageSourceIdentifier.contains(\"FPI\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+        "field_mappings": {
+          "ALIAS_4": "new BigDecimal(Var.messageID)",
+          "DATE_17": "TalendDate.parseDate(\"yyyy-MM-dd\", row1.respAckDate)",
+          "FLAG_17": "Var.status",
+          "CURRENCY_17": "row1.statusCode",
+          "STRING_17": "Relational.ISNULL(row1.statusDesc) ? row1.statusCode : row1.statusDesc",
+          "CORR_ACC_NO": "Var.FPI_CORR_ACC_NO"
+        }
+      },
+      "FCA": {
+        "filter": "(row1.messageSourceIdentifier.contains(\"FPC\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+        "field_mappings": {
+          "ALIAS_4": "new BigDecimal(Var.messageID)",
+          "DATE_17": "TalendDate.parseDate(\"yyyy-MM-dd\", row1.respAckDate)",
+          "FLAG_17": "Var.status",
+          "CURRENCY_17": "row1.statusCode",
+          "STRING_17": "Relational.ISNULL(row1.statusDesc) ? row1.statusCode : row1.statusDesc",
+          "CORR_ACC_NO": "Var.FCA_CORR_ACC_NO"
+        }
+      }
+    }
+  }
+}

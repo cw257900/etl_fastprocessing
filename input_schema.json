@@ -1,0 +1,102 @@
+{
+  "schema_name": "tMap_input_schema",
+  "description": "Input schema extracted from Talend tMap component",
+  "fields": [
+    {
+      "name": "messageSourceIdentifier",
+      "type": "string",
+      "nullable": true,
+      "description": "Source identifier for the message"
+    },
+    {
+      "name": "respAckDate",
+      "type": "string",
+      "nullable": true,
+      "description": "Response acknowledgment date"
+    },
+    {
+      "name": "respAckTime",
+      "type": "string",
+      "nullable": true,
+      "description": "Response acknowledgment time"
+    },
+    {
+      "name": "txnLegSeqNo1",
+      "type": "string",
+      "nullable": true,
+      "description": "Transaction leg sequence number 1"
+    },
+    {
+      "name": "transactionStatusFlag1",
+      "type": "string",
+      "nullable": true,
+      "description": "Transaction status flag for leg 1"
+    },
+    {
+      "name": "transactionStatusFlagDescription1",
+      "type": "string",
+      "nullable": true,
+      "description": "Transaction status flag description for leg 1"
+    },
+    {
+      "name": "txnLegSeqNo2",
+      "type": "string",
+      "nullable": true,
+      "description": "Transaction leg sequence number 2"
+    },
+    {
+      "name": "transactionStatusFlag2",
+      "type": "string",
+      "nullable": true,
+      "description": "Transaction status flag for leg 2"
+    },
+    {
+      "name": "transactionStatusFlagDescription2",
+      "type": "string",
+      "nullable": true,
+      "description": "Transaction status flag description for leg 2"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "nullable": true,
+      "description": "Overall status"
+    },
+    {
+      "name": "statusCode",
+      "type": "string",
+      "nullable": true,
+      "description": "Status code"
+    },
+    {
+      "name": "statusDesc",
+      "type": "string",
+      "nullable": true,
+      "description": "Status description"
+    },
+    {
+      "name": "successCode",
+      "type": "string",
+      "nullable": true,
+      "description": "Success code"
+    },
+    {
+      "name": "successMsg",
+      "type": "string",
+      "nullable": true,
+      "description": "Success message"
+    },
+    {
+      "name": "errorCode",
+      "type": "string",
+      "nullable": true,
+      "description": "Error code"
+    },
+    {
+      "name": "errorMsg",
+      "type": "string",
+      "nullable": true,
+      "description": "Error message"
+    }
+  ]
+}

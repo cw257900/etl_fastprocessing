@@ -1,0 +1,303 @@
+{
+  "output_schemas": {
+    "capri": {
+      "schema_name": "capri_output_schema",
+      "description": "CAPRI table output schema",
+      "filter_condition": "(row1.messageSourceIdentifier.contains(\"CPR\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+      "fields": [
+        {
+          "name": "CAPRI_MSG_SEQ_NO",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "nullable": true,
+          "description": "CAPRI message sequence number"
+        },
+        {
+          "name": "RESP_ACK_DATETIME",
+          "type": "string",
+          "length": 10,
+          "nullable": true,
+          "description": "Response acknowledgment datetime"
+        },
+        {
+          "name": "LEG1_STATUS_FLAG",
+          "type": "string",
+          "length": 3,
+          "precision": 2,
+          "nullable": true,
+          "description": "Leg 1 status flag"
+        },
+        {
+          "name": "LEG1_STATUS_FLAG_DESC",
+          "type": "string",
+          "length": 51,
+          "nullable": true,
+          "description": "Leg 1 status flag description"
+        },
+        {
+          "name": "LEG2_STATUS_FLAG",
+          "type": "string",
+          "length": 3,
+          "precision": 2,
+          "nullable": true,
+          "description": "Leg 2 status flag"
+        },
+        {
+          "name": "LEG2_STATUS_FLAG_DESC",
+          "type": "string",
+          "length": 13,
+          "nullable": true,
+          "description": "Leg 2 status flag description"
+        },
+        {
+          "name": "STATUS",
+          "type": "string",
+          "length": 2,
+          "nullable": true,
+          "description": "Status"
+        },
+        {
+          "name": "STATUS_DESC",
+          "type": "string",
+          "nullable": true,
+          "description": "Status description"
+        },
+        {
+          "name": "STATUS_CODE",
+          "type": "string",
+          "length": 3,
+          "nullable": true,
+          "description": "Status code"
+        },
+        {
+          "name": "STATUS_INFO_CODE",
+          "type": "string",
+          "nullable": true,
+          "description": "Status info code"
+        },
+        {
+          "name": "STATUS_INFO_MSG",
+          "type": "string",
+          "nullable": true,
+          "description": "Status info message"
+        }
+      ]
+    },
+    "swing": {
+      "schema_name": "swing_output_schema",
+      "description": "SWING table output schema",
+      "filter_condition": "(row1.messageSourceIdentifier.contains(\"SWG\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+      "fields": [
+        {
+          "name": "SWING_MSG_SEQ_NO",
+          "type": "string",
+          "length": 20,
+          "key": true,
+          "nullable": true,
+          "description": "SWING message sequence number"
+        },
+        {
+          "name": "RESP_ACK_DATETIME",
+          "type": "string",
+          "length": 10,
+          "nullable": true,
+          "description": "Response acknowledgment datetime"
+        },
+        {
+          "name": "LEG1_STATUS_FLAG",
+          "type": "string",
+          "length": 3,
+          "precision": 2,
+          "nullable": true,
+          "description": "Leg 1 status flag"
+        },
+        {
+          "name": "LEG1_STATUS_FLAG_DESC",
+          "type": "string",
+          "length": 51,
+          "nullable": true,
+          "description": "Leg 1 status flag description"
+        },
+        {
+          "name": "LEG2_STATUS_FLAG",
+          "type": "string",
+          "length": 3,
+          "precision": 2,
+          "nullable": true,
+          "description": "Leg 2 status flag"
+        },
+        {
+          "name": "LEG2_STATUS_FLAG_DESC",
+          "type": "string",
+          "length": 13,
+          "nullable": true,
+          "description": "Leg 2 status flag description"
+        },
+        {
+          "name": "STATUS",
+          "type": "string",
+          "length": 2,
+          "nullable": true,
+          "description": "Status"
+        },
+        {
+          "name": "STATUS_DESC",
+          "type": "string",
+          "nullable": true,
+          "description": "Status description"
+        },
+        {
+          "name": "STATUS_CODE",
+          "type": "string",
+          "length": 3,
+          "nullable": true,
+          "description": "Status code"
+        },
+        {
+          "name": "STATUS_INFO_CODE",
+          "type": "string",
+          "nullable": true,
+          "description": "Status info code"
+        },
+        {
+          "name": "STATUS_INFO_MSG",
+          "type": "string",
+          "nullable": true,
+          "description": "Status info message"
+        }
+      ]
+    },
+    "item": {
+      "schema_name": "item_output_schema",
+      "description": "Item table output schema",
+      "filter_condition": "(row1.messageSourceIdentifier.contains(\"T\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+      "fields": [
+        {
+          "name": "ITEM_ID",
+          "type": "decimal",
+          "key": true,
+          "nullable": true,
+          "description": "Item ID"
+        },
+        {
+          "name": "DATE_17",
+          "type": "date",
+          "pattern": "yyyy-MM-dd",
+          "nullable": true,
+          "description": "Date field"
+        },
+        {
+          "name": "FLAG_17",
+          "type": "integer",
+          "nullable": true,
+          "description": "Flag field"
+        },
+        {
+          "name": "CURRENCY_17",
+          "type": "string",
+          "nullable": true,
+          "description": "Currency field"
+        },
+        {
+          "name": "STRING_17",
+          "type": "string",
+          "nullable": true,
+          "description": "String field"
+        }
+      ]
+    },
+    "FPI": {
+      "schema_name": "fpi_output_schema",
+      "description": "FPI table output schema",
+      "filter_condition": "(row1.messageSourceIdentifier.contains(\"FPI\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+      "fields": [
+        {
+          "name": "ALIAS_4",
+          "type": "decimal",
+          "key": true,
+          "nullable": true,
+          "description": "Alias field"
+        },
+        {
+          "name": "DATE_17",
+          "type": "date",
+          "pattern": "dd-MM-yyyy",
+          "nullable": true,
+          "description": "Date field"
+        },
+        {
+          "name": "FLAG_17",
+          "type": "integer",
+          "nullable": true,
+          "description": "Flag field"
+        },
+        {
+          "name": "CURRENCY_17",
+          "type": "string",
+          "nullable": true,
+          "description": "Currency field"
+        },
+        {
+          "name": "STRING_17",
+          "type": "string",
+          "nullable": true,
+          "description": "String field"
+        },
+        {
+          "name": "CORR_ACC_NO",
+          "type": "decimal",
+          "key": true,
+          "nullable": true,
+          "description": "Correspondent account number"
+        }
+      ]
+    },
+    "FCA": {
+      "schema_name": "fca_output_schema",
+      "description": "FCA table output schema",
+      "filter_condition": "(row1.messageSourceIdentifier.contains(\"FPC\")) && (Var.Check_duplicates_trans.equalsIgnoreCase(\"N\"))",
+      "fields": [
+        {
+          "name": "ALIAS_4",
+          "type": "decimal",
+          "key": true,
+          "nullable": true,
+          "description": "Alias field"
+        },
+        {
+          "name": "DATE_17",
+          "type": "date",
+          "pattern": "dd-MM-yyyy",
+          "nullable": true,
+          "description": "Date field"
+        },
+        {
+          "name": "FLAG_17",
+          "type": "integer",
+          "nullable": true,
+          "description": "Flag field"
+        },
+        {
+          "name": "CURRENCY_17",
+          "type": "string",
+          "nullable": true,
+          "description": "Currency field"
+        },
+        {
+          "name": "STRING_17",
+          "type": "string",
+          "nullable": true,
+          "description": "String field"
+        },
+        {
+          "name": "CORR_ACC_NO",
+          "type": "decimal",
+          "key": true,
+          "nullable": true,
+          "description": "Correspondent account number"
+        }
+      ]
+    }
+  }
+}
