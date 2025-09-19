@@ -28,8 +28,13 @@ Contains the complete data transformation logic including:
 - **Output Mappings**: Field-by-field mapping expressions for each output table
 - **Filter Conditions**: Logic to determine which records go to which output tables
 
-### 4. Sample Input File (`sample_input.json`)
-Contains 6 sample records representing different message types:
+### 4. Sample Input Files
+Contains 6 sample records representing different message types in multiple formats:
+- **sample_input.csv** - CSV format for easy viewing and editing
+- **sample_input.xlsx** - Excel format for business users
+- **sample_input.json** - JSON format for API integration
+
+Sample data includes:
 - CPR message (success case)
 - SWG message (error case)
 - T message (item processing)
@@ -73,6 +78,8 @@ python3 talend_processor.py
 ```
 
 ### Processing Custom Input
+The processor supports multiple input formats:
+
 ```python
 from talend_processor import TalendProcessor
 
@@ -82,8 +89,20 @@ processor = TalendProcessor(
     'mapping_logic.json'
 )
 
+# Process CSV file
+output_files = processor.process_file('your_input.csv')
+
+# Process Excel file
+output_files = processor.process_file('your_input.xlsx')
+
+# Process JSON file (for API integration)
 output_files = processor.process_file('your_input.json')
 ```
+
+**Supported Input Formats:**
+- **CSV** (.csv) - Recommended for data analysts and business users
+- **Excel** (.xlsx, .xls) - Ideal for business stakeholders
+- **JSON** (.json) - Perfect for API integration and automated systems
 
 ## Output Files Generated
 

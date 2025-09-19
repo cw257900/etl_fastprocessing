@@ -1,0 +1,7 @@
+"messageSourceIdentifier","respAckDate","respAckTime","txnLegSeqNo1","transactionStatusFlag1","transactionStatusFlagDescription1","txnLegSeqNo2","transactionStatusFlag2","transactionStatusFlagDescription2","status","statusCode","statusDesc","successCode","successMsg","errorCode","errorMsg"
+"CPR123456789","2024-01-15","14:30:25","001","OK","Transaction processed successfully","002","OK","Second leg completed","OK","200","Success","S001","Transaction completed successfully","",""
+"SWG987654321","2024-01-15","15:45:10","001","NOK","Insufficient funds","","","","NOK","400","Failed","","","E001","Transaction failed due to insufficient funds"
+"T555666777","2024-01-15","16:20:30","001","OK","Processing complete","","","","OK","200","Completed","S002","Item processed successfully","",""
+"FPI111222333","2024-01-15","17:10:45","001","OK","FPI transaction completed","","","","OK","200","FPI Success","S003","FPI transaction successful","",""
+"FPC444555666","2024-01-15","18:05:15","001","OK","FCA transaction processed","","","","OK","200","FCA Success","S004","FCA transaction successful","",""
+"CPR999888777","2024-01-15","19:15:20","001","NOK","Duplicate transaction detected","","","","NOK","409","Duplicate","","","E002","Duplicate transaction"

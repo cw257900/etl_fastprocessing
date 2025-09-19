@@ -174,8 +174,19 @@ class TalendProcessor:
     
     def process_file(self, input_file: str, output_dir: str = '.') -> Dict[str, str]:
         """Process input file and generate output files for each table."""
-        with open(input_file, 'r') as f:
-            input_data = json.load(f)
+        import pandas as pd
+        
+        if input_file.endswith('.csv'):
+            df = pd.read_csv(input_file)
+            input_data = df.to_dict('records')
+        elif input_file.endswith('.xlsx') or input_file.endswith('.xls'):
+            df = pd.read_excel(input_file)
+            input_data = df.to_dict('records')
+        elif input_file.endswith('.json'):
+            with open(input_file, 'r') as f:
+                input_data = json.load(f)
+        else:
+            raise ValueError(f"Unsupported file format: {input_file}. Supported formats: CSV, Excel (.xlsx/.xls), JSON")
         
         all_results = {
             'capri': [],
@@ -203,8 +214,19 @@ class TalendProcessor:
     
     def print_summary(self, input_file: str):
         """Print processing summary."""
-        with open(input_file, 'r') as f:
-            input_data = json.load(f)
+        import pandas as pd
+        
+        if input_file.endswith('.csv'):
+            df = pd.read_csv(input_file)
+            input_data = df.to_dict('records')
+        elif input_file.endswith('.xlsx') or input_file.endswith('.xls'):
+            df = pd.read_excel(input_file)
+            input_data = df.to_dict('records')
+        elif input_file.endswith('.json'):
+            with open(input_file, 'r') as f:
+                input_data = json.load(f)
+        else:
+            raise ValueError(f"Unsupported file format: {input_file}. Supported formats: CSV, Excel (.xlsx/.xls), JSON")
         
         print(f"\nProcessing Summary:")
         print(f"Input records: {len(input_data)}")
@@ -227,6 +249,9 @@ class TalendProcessor:
 
 def main():
     """Main function to run the processor."""
+    import sys
+    import os
+    
     processor = TalendProcessor(
         'input_schema.json',
         'output_schemas.json', 
@@ -236,9 +261,23 @@ def main():
     print("Talend ETL Processor")
     print("===================")
     
-    output_files = processor.process_file('sample_input.json')
+    sample_files = ['sample_input.csv', 'sample_input.xlsx', 'sample_input.json']
+    input_file = None
     
-    processor.print_summary('sample_input.json')
+    for file in sample_files:
+        if os.path.exists(file):
+            input_file = file
+            break
+    
+    if not input_file:
+        print("Error: No sample input file found. Expected: sample_input.csv, sample_input.xlsx, or sample_input.json")
+        sys.exit(1)
+    
+    print(f"Processing input file: {input_file}")
+    
+    output_files = processor.process_file(input_file)
+    
+    processor.print_summary(input_file)
     
     print(f"\nOutput files generated:")
     for table, file_path in output_files.items():
